@@ -17,6 +17,7 @@ def Turn_Greyscale(colorImage):
     yposition = 0  # Keeps track of the horizontal position when editing image data
     xposition = 0  # Keeps track of the vertical position when editing image data
 
+    print("Turning to grayscale...")
     for x in colorImage:
         xposition = 0  # Resets the x position for every new row
         for i in x:
@@ -27,4 +28,7 @@ def Turn_Greyscale(colorImage):
 
     matplotlib.pyplot.imshow(greyscaleImage, cmap='gray', vmin=0, vmax=255)
 
-    return (greyscaleImage)
+    greyscaleImage = greyscaleImage[:, :, 0]
+
+    print("Grayscale complete...")
+    return greyscaleImage
