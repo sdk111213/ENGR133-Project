@@ -8,6 +8,7 @@ from modules.grayscale import Turn_Greyscale
 from modules.noise_smoothing import noiseSmooth
 
 directory = 'images/'
+output = '_output'
 
 try:
     image = input("Input the name and extension (png, jpeg) of the file that you want to test: ")
@@ -21,9 +22,9 @@ except FileNotFoundError:
     sys.exit()
 
 if threshold >= 100 or threshold <= 0:
-   print("Error: The threshold must be within the range of 0 to 100.")
+    print("Error: The threshold must be within the range of 0 to 100.")
 
-imgFile = plt.imread('images/Purdue_Arch.PNG')
+imgFile = plt.imread(directory + image)
 
 imgFile = Turn_Greyscale(imgFile)
 
@@ -44,3 +45,5 @@ imgFile = detectEdges(imgFile, threshold)
 
 plt.imshow(imgFile, cmap='gray')
 plt.show()
+
+plt.imwrite(imgFile, image + output, 'png')

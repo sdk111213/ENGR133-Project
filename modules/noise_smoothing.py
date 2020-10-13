@@ -1,4 +1,6 @@
-def noiseSmooth(image): #the argument is the image converted into the array  
+import numpy as np
+
+def noiseSmooth(image): #the argument is the image converted into the array
     G = [[np.float(1),np.float(4),np.float(6),np.float(4),np.float(1)], #the 5x5 array containing the gaussian filter 
          [np.float(4),np.float(16),np.float(24),np.float(16),np.float(4)],
          [np.float(6),np.float(24),np.float(36),np.float(24),np.float(6)],
@@ -12,6 +14,7 @@ def noiseSmooth(image): #the argument is the image converted into the array
         for y in range(0,len(image[0]),1):  #for the height of the image 
             z[x+2][y+2] = image[x][y]  #assign the value of the image to the zero matrix at the two rows and two columns to the right and bottom because the zero matrix is bigger by four columns and four rows
 
+    print('Edge Blurring/Noise smoothing...')
     for x in range(2,len(z)-4,1): #for the length of the zero padded matrix starting at the corner corresponding to the image 
         for y in range(2,len(z[0]) -4,1):#for the height of the zero padded matrix starting at the corner corresponding to the image #x is along row, y is along column 
             temp=[[z[x-2][y-2], z[x-1][y-2],z[x][y-2],z[x+1][y-2], z[x+2][y-2]],  #creates a temporary matrix that is the copy of the image 
@@ -52,6 +55,6 @@ def noiseSmooth(image): #the argument is the image converted into the array
         
             value = (a+b+c+d+e+f+g+h+i+j+k+l+m+n+o+p+q+r+s+t+u+v+w+xx+yy)/256.0 #sums the value and divides by 256
             blur[x-2][y-2] = value  #assigns the new image blurred image value at the point to the blurred matrix 
-    print("edge blurring/noise smoothing complete") #signals that the blurring is complete 
+    print("Edge Blurring/Noise Smoothing Complete") #signals that the blurring is complete
     return blur  #returns blurred matrix
 
