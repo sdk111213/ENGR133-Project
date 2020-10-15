@@ -1,6 +1,6 @@
 import numpy as np
 
-# o--========= Noise smoothing; written by Bill =========--o
+# o--========= Greyscale Image; written by Bill =========--o
 
 
 def turn_greyscale(color_image):
@@ -85,7 +85,7 @@ def noise_smooth(image):  # the argument is the image converted into the array
     print("Edge Blurring/Noise Smoothing Complete")  # signals that the blurring is complete
     return blur  # returns blurred matrix
 
-# o--========= Edge enhance; written by Jacob =========--o
+# o--========= Edge Enhance; written by Jacob =========--o
 
 
 def magnitude(x, y):  # Instead of supplying a magnitude function for matrices directly, use a function that takes input
@@ -134,7 +134,7 @@ def edge_enhance(img):
 
     return output_image  # Returns a Sobel-operated image matrix
 
-# o--========= Noise smoothing; written by Aidan =========--o
+# o--========= Threshold Edges; written by Aidan =========--o
 
 
 def detect_edges(img, threshold):  # Takes a image matrix and a threshold float as an argument
