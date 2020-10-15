@@ -13,20 +13,20 @@ import matplotlib
 def Turn_Greyscale(colorImage):
     # colorImage = matplotlib.pyplot.imread('Lenna_(test_image).png')
     # New array for storing the greyscale image data
+
+    padding_scale = 1  # Set up how large the padding will be to allow gradient computation for edges
+    correction = padding_scale + 1  # To allow the output image to write a value to a pixel; prevent matrix 'index errors'
+
+    padded_image = np.pad(colorImage, (padding_scale, padding_scale))
     greyscaleImage = np.empty(colorImage.shape)
-    yposition = 0  # Keeps track of the horizontal position when editing image data
-    xposition = 0  # Keeps track of the vertical position when editing image data
 
     print("Turning to grayscale...")
-    for x in colorImage:
-        xposition = 0  # Resets the x position for every new row
-        for i in x:
-            greyscaleImage[yposition, xposition] = 0.2126 * i[0] + 0.7152 * i[1] + 0.0722 * i[
-                2]  # calculated the greyscale value from each pixels rgb data
-            xposition = xposition + 1
-        yposition = yposition + 1  # Moves to the next row once every corresponding x position has been checked
+    for x_position, x in enumerate(colorImage):  # Enumerate the colorImage for indexing the row, x, for each row x
+        for y_position, i in enumerate(x):  # Enumerate the colorImage for indexing the pixel, i, for each column y
+            greyscaleImage[x_position, y_position] = 0.2126 * i[0] + 0.7152 * i[1] + 0.0722 * i[2]
+            # calculated the greyscale value from each pixels rgb data
 
-    matplotlib.pyplot.imshow(greyscaleImage, cmap='gray', vmin=0, vmax=255)
+    # matplotlib.pyplot.imshow(greyscaleImage, cmap='gray', vmin=0, vmax=255)
 
     greyscaleImage = greyscaleImage[:, :, 0]
 

@@ -1,4 +1,6 @@
 import numpy as np
+from matplotlib import pyplot as plt
+
 
 def noiseSmooth(image): #the argument is the image converted into the array
     G = [[np.float(1),np.float(4),np.float(6),np.float(4),np.float(1)], #the 5x5 array containing the gaussian filter 
@@ -7,16 +9,21 @@ def noiseSmooth(image): #the argument is the image converted into the array
          [np.float(4),np.float(16),np.float(24),np.float(16),np.float(4)],
          [np.float(1),np.float(4),np.float(6),np.float(4),np.float(1)]]
                                                       
-    z = np.zeros((len(image)+4,len(image[0])+4))  #creates a matrix of zeros that is zero padded with two additional columns and rows 
+    #z = np.zeros((len(image)+4,len(image[0])+4))  #creates a matrix of zeros that is zero padded with two additional columns and rows
     blur = np.zeros((len(image),len(image[0]))) #creates the eventual matrix to return that is initially a matrix of zeros the size of the image 
-    
-    for x in range(0,len(image),1): #for the length of the image 
-        for y in range(0,len(image[0]),1):  #for the height of the image 
-            z[x+2][y+2] = image[x][y]  #assign the value of the image to the zero matrix at the two rows and two columns to the right and bottom because the zero matrix is bigger by four columns and four rows
+
+    z = np.pad(image, (2, 2), mode='reflect')
+
+    # plt.imshow(z, cmap='gray')
+    # plt.show()
+
+    #for x in range(0,len(image),1): #for the length of the image
+    #    for y in range(0,len(image[0]),1):  #for the height of the image
+    #        z[x+2][y+2] = image[x][y]  #assign the value of the image to the zero matrix at the two rows and two columns to the right and bottom because the zero matrix is bigger by four columns and four rows
 
     print('Edge Blurring/Noise smoothing...')
-    for x in range(2,len(z)-4,1): #for the length of the zero padded matrix starting at the corner corresponding to the image 
-        for y in range(2,len(z[0]) -4,1):#for the height of the zero padded matrix starting at the corner corresponding to the image #x is along row, y is along column 
+    for x in range(2,len(z)-2,1): #for the length of the zero padded matrix starting at the corner corresponding to the image
+        for y in range(2,len(z[0])-2,1):#for the height of the zero padded matrix starting at the corner corresponding to the image #x is along row, y is along column
             temp=[[z[x-2][y-2], z[x-1][y-2],z[x][y-2],z[x+1][y-2], z[x+2][y-2]],  #creates a temporary matrix that is the copy of the image 
                   [z[x-2][y-1],z[x-1][y-1],z[x][y-1], z[x+1][y-1], z[x+2][y-1]],
                    [z[x-2][y], z[x-1][y], z[x][y], z[x+1][y], z[x+2][y]],

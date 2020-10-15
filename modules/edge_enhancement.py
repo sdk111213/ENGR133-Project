@@ -1,4 +1,4 @@
-# from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 import numpy as np
 from scipy import ndimage
 
@@ -29,10 +29,10 @@ def edge_enhance(img):  # An image argument, which will be a ndarray matrix will
                     [0, 0, 0],
                     [1, 2, 1]])
 
-    padding_scale = 1  # Set up how large the padding will be to allow gradient computation for edges
-    correction = padding_scale+1  # To allow the output image to write a value to a pixel; prevent matrix 'index errors'
+    padding_scale = 3  # Set up how large the padding will be to allow gradient computation for edges
+    correction = padding_scale+2  # To allow the output image to write a value to a pixel; prevent matrix 'index errors'
 
-    padded_image = np.pad(img, (padding_scale, padding_scale))  # Allows computation the gradient at boundaries
+    padded_image = np.pad(img, (padding_scale, padding_scale), mode='reflect')  # Allows computation the gradient at boundaries
     output_image = np.zeros_like(img)  # Create an image output to allow a gradient to assign a value to each pixel
 
     print("Computing gradient of each pixel...")  # Indicate that the code is computing the gradient of each pixel
@@ -44,9 +44,10 @@ def edge_enhance(img):  # An image argument, which will be a ndarray matrix will
                 window = np.array(padded_image[y - 1:y + 2, x - 1:x + 2])  # Create a 3x3 Matrix
                 del_x, del_y = convolve_2d(window, f_x, f_y)  # Transfer window operations from padded to output pixel
                 gradient = magnitude(np.sum(del_x), np.sum(del_y))  # Calculate the gradient of the two convolutions
-                output_image[y-correction][x-correction] = gradient # Set the value of output pixel to the gradient
+                output_image[y-correction][x-correction] = gradient  # Set the value of output pixel to the gradient
 
     print("Gradient computation completed.")  # Indicate that the code has finished computation
+
     return output_image  # Returns a Sobel-operated image matrix
 
 
