@@ -96,5 +96,5 @@ def main():
     # Save the final, processed image into the output directory
 
 
-if __name__ == '__main__':  # Because this is a script and not an executable, this statement is required.
+if __name__ == '__main__':  # Because this is a script and not an executable, this statement is standard.
     main()
