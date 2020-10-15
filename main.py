@@ -16,7 +16,7 @@ Table "N" gineers
 
 Authors:
 Sihun Kim kim710@purdue.edu
-Bill Lynch
+Bill Lynch lynch148@purdue.edu
 Jacob Valdez valdez24@purdue.edu
 Aidan Velleca avelleca@purdue.edu
 

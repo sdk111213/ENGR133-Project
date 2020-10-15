@@ -4,8 +4,6 @@ Created on Thu Oct  8 11:51:06 2020
 
 @author: AIDAN
 """
-from math import sqrt
-
 
 # imgFile = plt.imread('Purdue_Arch.PNG')
 
