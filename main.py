@@ -1,3 +1,8 @@
+from main_functions import detect_edges, edge_enhance, noise_smooth, turn_greyscale
+from matplotlib import image as img  # Import matplotlib's image library to access a better image saving method
+from matplotlib import pyplot as plt  # Import pyplot to extract a matrix out of the file image
+import sys  # Import sys only for allowing a safe script exit.
+
 """
 ==========================================================================================================
 ENGR 133 Fa 2020
@@ -29,15 +34,6 @@ ACADEMIC INTEGRITY STATEMENT
 ===============================================================================
 '''
 
-from matplotlib import image as mpimg
-from matplotlib import pyplot as plt
-import numpy as np
-import sys
-
-from modules.edge_enhancement import edge_enhance
-from modules.edge_detection import detectEdges
-from modules.grayscale import Turn_Greyscale
-from modules.noise_smoothing import noiseSmooth
 
 image_directory = 'images/'
 output_directory = 'output/'
@@ -46,7 +42,6 @@ grey = '_grey'
 blurred = '_blurred'
 edged = '_edged'
 detect = '_threshold'
-
 
 try:
     image = input("Input the name of the file (without the extension) that you want to process: ")
@@ -78,26 +73,26 @@ if threshold >= 1 or threshold <= 0:
 def main():
     global imgFile  # Modify the imported image file globally, allowing exchange of processed images between functions.
 
-    imgFile = Turn_Greyscale(imgFile)  # Turn the image greyscale.
-    mpimg.imsave(output_directory + image + grey + '.' + extension, imgFile, cmap='gray', format='png')
+    imgFile = turn_greyscale(imgFile)  # Turn the image greyscale.
+    img.imsave(output_directory + image + grey + '.' + extension, imgFile, cmap='gray', format='png')
     # Save this image step to an output directory
 
-    imgFile = noiseSmooth(imgFile)  # Noise smooth the image.
-    mpimg.imsave(output_directory + image + blurred + '.' + extension, imgFile, cmap='gray', format='png')
+    imgFile = noise_smooth(imgFile)  # Noise smooth the image.
+    img.imsave(output_directory + image + blurred + '.' + extension, imgFile, cmap='gray', format='png')
     # Save this image step to an output directory
 
     imgFile = edge_enhance(imgFile)  # Edge enhance the image
-    mpimg.imsave(output_directory + image + edged + '.' + extension, imgFile, cmap='gray', format='png')
+    img.imsave(output_directory + image + edged + '.' + extension, imgFile, cmap='gray', format='png')
     # Save this image step to an output directory
 
-    imgFile = detectEdges(imgFile, threshold)  # Threshold the image for edges
-    mpimg.imsave(output_directory + image + detect + '.' + extension, imgFile, cmap='gray', format='png')
+    imgFile = detect_edges(imgFile, threshold)  # Threshold the image for edges
+    img.imsave(output_directory + image + detect + '.' + extension, imgFile, cmap='gray', format='png')
     # Save this image step to an output directory
 
     plt.imshow(imgFile, cmap='gray')
     plt.show()
 
-    mpimg.imsave(output_directory + image + output + '.' + extension, imgFile, cmap='gray', format='png')
+    img.imsave(output_directory + image + output + '.' + extension, imgFile, cmap='gray', format='png')
     # Save the final, processed image into the output directory
 
 
